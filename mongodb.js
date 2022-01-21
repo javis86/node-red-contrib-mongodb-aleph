@@ -85,13 +85,13 @@ module.exports = function(RED) {
                     node.status({fill:"green",shape:"dot",text:RED._("mongodb.status.connected")});
                     node.client = client;
                     var db = client.db();
-                    //console.log( db);
                     noerror = true;
                     var coll;
 
                     if (node.collection) {
                         coll = db.collection(node.collection);
                     }
+
                     node.on("input",function(msg) {
                         if (!node.collection) {
                             if (msg.collection) {
@@ -104,6 +104,7 @@ module.exports = function(RED) {
                         }
                         delete msg._topic;
                         delete msg.collection;
+                        
                         if (node.operation === "store") {
                             if (node.payonly) {
                                 if (typeof msg.payload !== "object") {
@@ -115,14 +116,20 @@ module.exports = function(RED) {
                                 coll.save(msg.payload,function(err, item) {
                                     if (err) {
                                         node.error(err,msg);
-                                    }
+                                        return;
+                                    }              
+
+                                    node.send(msg);
                                 });
                             }
                             else {
                                 coll.save(msg,function(err, item) {
-                                    if (err) {
-                                        node.error(err,msg);
+                                    if (err) { 
+                                        node.error(err, msg); 
+                                        return;
                                     }
+
+                                    node.send(msg);
                                 });
                             }
                         }
@@ -136,15 +143,21 @@ module.exports = function(RED) {
                                 }
                                 coll.insert(msg.payload, function(err, item) {
                                     if (err) {
-                                        node.error(err,msg);
+                                        node.error(err, msg);
+                                        return;
                                     }
+
+                                    node.send(msg);
                                 });
                             }
                             else {
                                 coll.insert(msg, function(err,item) {
                                     if (err) {
-                                        node.error(err,msg);
+                                        node.error(err, msg);
+                                        return;
                                     }
+
+                                    node.send(msg);
                                 });
                             }
                         }
@@ -163,15 +176,21 @@ module.exports = function(RED) {
                             }
                             coll.update(query, payload, options, function(err, item) {
                                 if (err) {
-                                    node.error(err,msg);
+                                    node.error(err, msg);
+                                    return;
                                 }
+
+                                node.send(msg);
                             });
                         }
                         else if (node.operation === "delete") {
                             coll.remove(msg.payload, function(err, items) {
                                 if (err) {
-                                    node.error(err,msg);
+                                    node.error(err, msg);
+                                    return;
                                 }
+
+                                node.send(msg);
                             });
                         }
                     });
@@ -216,6 +235,7 @@ module.exports = function(RED) {
                     var db = client.db();
                     noerror = true;
                     var coll;
+
                     node.on("input", function(msg) {
                         if (!node.collection) {
                             if (msg.collection) {
