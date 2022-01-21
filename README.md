@@ -1,10 +1,9 @@
-node-red-node-mongodb
+node-red-contrib-mongodb-aleph
 =====================
 
 A <a href="http://nodered.org" target="_new">Node-RED</a> node to save data in a MongoDB database.
 
-**Note** : This is the same node as was in the core of Node-RED.
-As of v0.10.8 you will need to install it from here if still required.
+**Note** : This is the same node as was in [Node-Red-Nodes project](https://github.com/node-red/node-red-nodes/tree/master/storage/mongodb) of Node-RED.
 
 Pre-requisite
 -------------
@@ -17,13 +16,13 @@ Install
 
 Run the following command in your Node-RED user directory - typically `~/.node-red`
 ```
-        npm install node-red-node-mongodb
+        npm install node-red-contrib-mongodb-aleph
 ```
 Note that this package requires a MongoDB client package at least version 3.6.3 - if you have an older (version 2) client,
 you may need to remove that before installing this
 ```
         npm remove mongodb
-        npm install node-red-node-mongodb
+        npm install node-red-contrib-mongodb-aleph
 ```
 
 Usage
