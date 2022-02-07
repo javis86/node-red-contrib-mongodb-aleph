@@ -15,8 +15,6 @@ module.exports = function(RED) {
         this.connectOptions= n.connectOptions;
         this.topology = n.topology;
 
-        //console.log(this);
-
         var clustered = (this.topology !== "direct") || false;
 
         var url = "mongodb://";
@@ -42,7 +40,6 @@ module.exports = function(RED) {
             url += "?" + this.connectOptions;
         }
 
-        console.log("MongoDB URL: " + url);
         this.url = url;
     }
 
@@ -221,7 +218,7 @@ module.exports = function(RED) {
         var noerror = true;
 
         var connectToDB = function() {
-            console.log("connecting:  " + node.mongoConfig.url);
+            node.log("connecting to mongodb...");
             MongoClient.connect(node.mongoConfig.url, function(err,client) {
                 if (err) {
                     node.status({fill:"red",shape:"ring",text:RED._("mongodb.status.error")});
@@ -300,7 +297,6 @@ module.exports = function(RED) {
                                 }
                                 else {
                                      cursor.toArray(function(cursorError, cursorDocs) {
-                                       //console.log(cursorDocs);
                                        if (cursorError) {
                                          node.error(cursorError);
                                        }
