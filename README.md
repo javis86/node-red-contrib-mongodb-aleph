@@ -1,6 +1,5 @@
-node-red-contrib-mongodb-aleph
+# node-red-contrib-mongodb-aleph
 [![npm version](https://badge.fury.io/js/node-red-contrib-mongodb-aleph.svg)](https://badge.fury.io/js/node-red-contrib-mongodb-aleph)
-=====================
 
 A <a href="http://nodered.org" target="_new">Node-RED</a> node to save data in a MongoDB database.
 
