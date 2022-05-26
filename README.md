@@ -1,4 +1,5 @@
 node-red-contrib-mongodb-aleph
+[![npm version](https://badge.fury.io/js/node-red-contrib-mongodb-aleph.svg)](https://badge.fury.io/js/node-red-contrib-mongodb-aleph)
 =====================
 
 A <a href="http://nodered.org" target="_new">Node-RED</a> node to save data in a MongoDB database.
@@ -92,3 +93,7 @@ If writing the whole msg object then it must contain an \_id property.
 This could be a unique constant or you could create one based on some other msg property.
 
 Currently we do not limit or cap the collection size at all...
+
+## Changelog
+
+See `CHANGELOG.md` for more info, including information regarding breaking changes per version.
