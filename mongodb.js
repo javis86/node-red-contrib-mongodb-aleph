@@ -120,7 +120,7 @@ module.exports = function(RED) {
                                 });
                             }
                             else {
-                                coll.save(msg,function(err, item) {
+                                coll.insertOne(msg,function(err, item) {
                                     if (err) { 
                                         node.error(err, msg); 
                                         return;
